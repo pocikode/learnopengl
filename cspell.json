@@ -3,6 +3,8 @@
     "glfw"
   ],
   "words": [
-    "OPENGL"
+    "OPENGL",
+    "Shaderiv",
+    "Programiv"
   ]
 }
