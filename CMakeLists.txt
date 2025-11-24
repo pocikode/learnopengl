@@ -5,6 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Include custom cmake modules
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CopyAssets.cmake)
+
 find_package(OpenGL REQUIRED)
 find_package(PkgConfig REQUIRED)
 
@@ -14,6 +17,7 @@ include_directories(
     ${OpenGL_INCLUDE_DIRS}
     ${GLFW_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glad/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 link_directories(${GLFW_LIBRARY_DIRS})
 
@@ -30,3 +34,6 @@ file(GLOB SRC_FILES "./src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 target_link_libraries(${PROJECT_NAME} ${ALL_LIBRARIES})
+
+# Copy assets to build directory
+copy_assets_post_build(${PROJECT_NAME})
