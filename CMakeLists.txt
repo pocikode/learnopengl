@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.30)
 project(learnopengl)
 
+include(FetchContent)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -12,6 +14,13 @@ find_package(OpenGL REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(GLFW REQUIRED glfw3)
+
+fetchcontent_declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG a532f5b1cf27d6a3c099437e6959cf7e398a0a67 #refs/tags/1.0.2
+)
+fetchcontent_makeavailable(glm)
 
 include_directories(
     ${OpenGL_INCLUDE_DIRS}
@@ -28,6 +37,7 @@ set(ALL_LIBRARIES
     ${OpenGL_LIBRARIES}
     ${GLFW_LIBRARIES}
     glad
+    glm::glm
 )
 
 file(GLOB SRC_FILES "./src/*.cpp")
